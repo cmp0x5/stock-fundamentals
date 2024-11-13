@@ -10,12 +10,14 @@ async def get_ticker_history(update: Update, context: ContextTypes.DEFAULT_TYPE)
         await update.message.reply_text(f"Searching for ticker \"{stock}\"...")
         if len(stock) > 10:
             await update.message.reply_text(f"Invalid ticker!")
+            return
         
         ticker = yf.Ticker(stock)
         data = ticker.history(period="max")
         if data.empty:
             await update.message.reply_text(f"Ticker not found!")
-        
+            return
+
         name = ticker.info["longName"]
         exchange = ticker.info["exchange"]
         currency = ticker.info["currency"]
