@@ -1,0 +1,19 @@
+services:
+  python-bot:
+    build:
+      context: .
+    container_name: python-bot
+    env_file: .env
+    volumes:
+      - ./logs:/app/logs
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: unless-stopped

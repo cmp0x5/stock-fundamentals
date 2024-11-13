@@ -7,7 +7,7 @@ import yfinance as yf
 async def get_ticker_history(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         stock = update.message.text[7:]
-        await update.message.reply_text(f"{stock}")
+        await update.message.reply_text(f"Searching for ticker \"{stock}\"...")
         if len(stock) > 10:
             await update.message.reply_text(f"Invalid ticker!")
         
