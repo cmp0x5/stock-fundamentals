@@ -5,7 +5,6 @@ import requests
 
 from telegram import Update, ForceReply
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
-from handlers.rssparse import ctf_time_update
 from handlers.finance import get_ticker_history
 
 logging.basicConfig(
@@ -42,7 +41,6 @@ def main() -> None:
     application = Application.builder().token(token).build()
     
     application.add_handler(CommandHandler("start", start))
-    application.add_handler(CommandHandler("ctf", ctf_time_update))
     application.add_handler((CommandHandler("chart", get_ticker_history)))
     application.add_handler(CommandHandler("help", help))
 
