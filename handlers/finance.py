@@ -22,16 +22,17 @@ async def get_ticker_history(update: Update, context: ContextTypes.DEFAULT_TYPE)
         exchange = ticker.info["exchange"]
         currency = ticker.info["currency"]
 
+
         currentPrice = ticker.info["currentPrice"]
         netIncomeToCommon = ticker.info["netIncomeToCommon"]
-        trainingEps = ticker.info["trailingEps"]
+        trailingEps = ticker.info["trailingEps"]
         returnOnEquity = ticker.info["returnOnEquity"] * 100
         profitMargins = ticker.info["profitMargins"] * 100
         revenueGrowth = ticker.info["revenueGrowth"] * 100
         earningsGrowth = ticker.info["earningsGrowth"] * 100
         debtToEquity = ticker.info["debtToEquity"]
         currentRatio = ticker.info["currentRatio"]
-        dividendYield = ticker.info["dividentYield"] * 100
+        dividendYield = ticker.info["dividendYield"] * 100
         payoutRatio = ticker.info["payoutRatio"] * 100
         priceToEarnings = currentPrice / trailingEps
         priceToBook = ticker.info["priceToBook"]
@@ -39,7 +40,6 @@ async def get_ticker_history(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
         await update.message.reply_text(f"""
             Current Price: {currentPrice} {currency} 
-            \nResults for fiscal year {ticker.info["fiscalYear"]}:
             \nProfitability:
             \nNet Income To Common Shareholders: {netIncomeToCommon} {currency} 
             \nEarnings Per Share: {trailingEps} {currency} 
@@ -51,7 +51,7 @@ async def get_ticker_history(update: Update, context: ContextTypes.DEFAULT_TYPE)
             \nFinancial Health:
             \nDebt to Equity: {debtToEquity}%
             \nCurrent Ratio: {currentRatio} 
-            \nDivident Health:
+            \nDividend Health:
             \nDividend Yield: {dividendYield}%
             \nPayout Ratio: {payoutRatio}%
             \nValuation Metrics:
