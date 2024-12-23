@@ -23,10 +23,15 @@ async def get_ticker_history(update: Update, context: ContextTypes.DEFAULT_TYPE)
         currency = ticker.info["currency"]
 
         var = (data["Close"].iloc[-1] / data["Close"].iloc[0] - 1) * 100
-        sign = "+" if var > 0 else ""
+        if (var > 0):
+            sign = "+"
+            line_color = "green"
+        else:
+            sign = ""
+            line_color = "red"
 
         plt.figure(figsize=(10,6))
-        plt.plot(data.index, data["Close"], label=f"{name}")
+        plt.plot(data.index, data["Close"], label=f"{name}", color=line_color)
         plt.xlabel("Date")
         plt.ylabel(f"Closing Price")
         plt.title(f"{name} ({currency})\n"
