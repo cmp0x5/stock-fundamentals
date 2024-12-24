@@ -18,25 +18,44 @@ async def get_ticker_history(update: Update, context: ContextTypes.DEFAULT_TYPE)
             await update.message.reply_text(f"Ticker not found!")
             return
 
-        name = ticker.info["longName"]
-        exchange = ticker.info["exchange"]
-        currency = ticker.info["currency"]
+        info = ticker.info
+        name = info.get("longName", "Data not available")
+        exchange = info.get("exchange", "Data not available")
+        currency = info.get("currency", "Data not available")
 
+        currentPrice = info.get("currentPrice", "Data not available")
+        netIncomeToCommon = info.get("netIncomeToCommon", "Data not available")
+        trailingEps = info.get("trailingEps", "Data not available")
+        returnOnEquity = info.get("returnOnEquity", "Data not available")
+        profitMargins = info.get("profitMargins", "Data not available")
+        revenueGrowth = info.get("revenueGrowth", "Data not available")
+        earningsGrowth = info.get("earningsGrowth", "Data not available")
+        debtToEquity = info.get("debtToEquity", "Data not available")
+        currentRatio = info.get("currentRatio", "Data not available")
+        dividendYield = info.get("dividendYield", "Data not available")
+        payoutRatio = info.get("payoutRatio", "Data not available")
+        priceToBook = info.get("priceToBook", "Data not available")
+        freeCashFlow = info.get("freeCashflow", "Data not available")
 
-        currentPrice = ticker.info["currentPrice"]
-        netIncomeToCommon = ticker.info["netIncomeToCommon"]
-        trailingEps = ticker.info["trailingEps"]
-        returnOnEquity = ticker.info["returnOnEquity"] * 100
-        profitMargins = ticker.info["profitMargins"] * 100
-        revenueGrowth = ticker.info["revenueGrowth"] * 100
-        earningsGrowth = ticker.info["earningsGrowth"] * 100
-        debtToEquity = ticker.info["debtToEquity"]
-        currentRatio = ticker.info["currentRatio"]
-        dividendYield = ticker.info["dividendYield"] * 100
-        payoutRatio = ticker.info["payoutRatio"] * 100
-        priceToEarnings = currentPrice / trailingEps
-        priceToBook = ticker.info["priceToBook"]
-        freeCashFlow = ticker.info["freeCashflow"]
+        if type(currentPrice) == str or type(trailingEps) == str:
+            priceToEarnings = "Data not available"
+        else:
+            priceToEarnings = currentPrice / trailingEps
+
+        #currentPrice = ticker.info["currentPrice"]
+        #netIncomeToCommon = ticker.info["netIncomeToCommon"]
+        #trailingEps = ticker.info["trailingEps"]
+        #returnOnEquity = ticker.info["returnOnEquity"] * 100
+        #profitMargins = ticker.info["profitMargins"] * 100
+        #revenueGrowth = ticker.info["revenueGrowth"] * 100
+        #earningsGrowth = ticker.info["earningsGrowth"] * 100
+        #debtToEquity = ticker.info["debtToEquity"]
+        #currentRatio = ticker.info["currentRatio"]
+        #dividendYield = ticker.info["dividendYield"] * 100
+        #payoutRatio = ticker.info["payoutRatio"] * 100
+        #priceToEarnings = currentPrice / trailingEps
+        #priceToBook = ticker.info["priceToBook"]
+        #freeCashFlow = ticker.info["freeCashflow"]
 
         await update.message.reply_text(f"""
             Current Price: {currentPrice} {currency} 
