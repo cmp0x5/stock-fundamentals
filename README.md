@@ -1,4 +1,4 @@
-# exchange-intel
+# caravansary
 
 docker build -t python-bot .
 
